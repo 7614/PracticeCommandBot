@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.TutorialDriveTrain_Subsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,7 +26,21 @@ import frc.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
+  public static TutorialDriveTrain_Subsystem DriveTrain = new TutorialDriveTrain_Subsystem();
+
+
   public static OI m_oi;
+
+  
+  //copied from javadoc example of 4 wheel tank-drive
+   Spark m_frontLeft = new Spark(1);
+   Spark m_rearLeft = new Spark(2);
+  //make getters for these laters
+   public SpeedControllerGroup m_left = new SpeedControllerGroup(m_frontLeft, m_rearLeft);
+
+   Spark m_frontRight = new Spark(3);
+   Spark m_rearRight = new Spark(4);
+   public SpeedControllerGroup m_right = new SpeedControllerGroup(m_frontRight, m_rearRight);
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -51,7 +67,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    System.out.println("Send Help");
   }
 
   /**
@@ -121,6 +136,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    //this is where we do things (ish)
   }
 
   /**
