@@ -16,10 +16,15 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
+/*
+  This is how wiring is connected to the code. give the components names to make them usable. 
+*/
 public class RobotMap {
-  public static final int LEFTMOTOR = 0;
-  public static final int RIGHTMOTOR = 1;
-  public static final int ARMMOTOR = 2;
+  public static final int LEFTFRONT = 5;
+  public static final int LEFTBACK = 3;
+
+  public static final int RIGHTFRONT = 4;
+  public static final int RIGHTBACK = 6;
   //the joysticks can also be placed into a multitude of different ports apparently
   public static final int JOYSTICKPORT =1;
   // If you are using multiple modules, make sure to define both the port
@@ -27,14 +32,5 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-  //copied from javadoc example of 4 wheel tank-drive
-  Spark m_frontLeft = new Spark(1);
-  Spark m_rearLeft = new Spark(2);
-  //make getters for these laters
-  public SpeedControllerGroup m_left = new SpeedControllerGroup(m_frontLeft, m_rearLeft);
-
-  Spark m_frontRight = new Spark(3);
-  Spark m_rearRight = new Spark(4);
-  public SpeedControllerGroup m_right = new SpeedControllerGroup(m_frontRight, m_rearRight);
 
 }

@@ -7,10 +7,13 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
@@ -26,28 +29,32 @@ import frc.robot.subsystems.TutorialDriveTrain_Subsystem;
  */
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  public static TutorialDriveTrain_Subsystem DriveTrain = new TutorialDriveTrain_Subsystem();
+  
+  private static final String kDefaultAuto = "Default";
+  private static final String kCustomAuto = "My Auto";
 
+  //initializes the 2 talon's on the left, and assigns them to a speed controller group
+private final WPI_TalonSRX leftBack = new WPI_TalonSRX(RobotMap.LEFTBACK);
+  private final WPI_TalonSRX leftFront = new WPI_TalonSRX(RobotMap.LEFTFRONT);
+  private final SpeedControllerGroup leftGroup = new SpeedControllerGroup(leftBack, leftFront);
+  //initializes the 2 talon's on the right, and assigns them a speed controller group
+private final WPI_TalonSRX rightBack = new WPI_TalonSRX(RobotMap.RIGHTBACK);
+  private final WPI_TalonSRX rightFront = new WPI_TalonSRX(RobotMap.RIGHTFRONT);
+  private final SpeedControllerGroup rightGroup = new SpeedControllerGroup(rightBack, rightFront);
 
+  //A differential drive for the central 2 talonSRX motors
+  public final DifferentialDrive DriveTrain = new DifferentialDrive(leftGroup, rightGroup);
+  //defines the oi object for this instance of robot.
   public static OI m_oi;
 
   
-  //copied from javadoc example of 4 wheel tank-drive
-   Spark m_frontLeft = new Spark(1);
-   Spark m_rearLeft = new Spark(2);
-  //make getters for these laters
-   public SpeedControllerGroup m_left = new SpeedControllerGroup(m_frontLeft, m_rearLeft);
-
-   Spark m_frontRight = new Spark(3);
-   Spark m_rearRight = new Spark(4);
-   public SpeedControllerGroup m_right = new SpeedControllerGroup(m_frontRight, m_rearRight);
-
+  
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be
-   * used for any initialization code.
+   * used for any initialization code. RUNS ONCE
    */
   @Override
   public void robotInit() {
