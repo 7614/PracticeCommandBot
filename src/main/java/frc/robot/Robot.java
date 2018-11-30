@@ -33,17 +33,8 @@ public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
 
-  //initializes the 2 talon's on the left, and assigns them to a speed controller group
-private final WPI_TalonSRX leftBack = new WPI_TalonSRX(RobotMap.LEFTBACK);
-  private final WPI_TalonSRX leftFront = new WPI_TalonSRX(RobotMap.LEFTFRONT);
-  private final SpeedControllerGroup leftGroup = new SpeedControllerGroup(leftBack, leftFront);
-  //initializes the 2 talon's on the right, and assigns them a speed controller group
-private final WPI_TalonSRX rightBack = new WPI_TalonSRX(RobotMap.RIGHTBACK);
-  private final WPI_TalonSRX rightFront = new WPI_TalonSRX(RobotMap.RIGHTFRONT);
-  private final SpeedControllerGroup rightGroup = new SpeedControllerGroup(rightBack, rightFront);
-
-  //A differential drive for the central 2 talonSRX motors
-  public final DifferentialDrive DriveTrain = new DifferentialDrive(leftGroup, rightGroup);
+  
+  public TutorialDriveTrain_Subsystem driveTrain;
   //defines the oi object for this instance of robot.
   public static OI m_oi;
 
@@ -62,6 +53,8 @@ private final WPI_TalonSRX rightBack = new WPI_TalonSRX(RobotMap.RIGHTBACK);
     m_chooser.addDefault("Default Auto", new ExampleCommand());
     // chooser.addObject("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    
+    driveTrain = new TutorialDriveTrain_Subsystem();
   }
 
   /**
