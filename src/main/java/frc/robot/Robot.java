@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.*;
@@ -34,7 +36,7 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "My Auto";
 
   
-  public TutorialDriveTrain_Subsystem driveTrain;
+  public static TutorialDriveTrain_Subsystem driveTrain;
   //defines the oi object for this instance of robot.
   public static OI m_oi;
 
@@ -52,11 +54,15 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     m_chooser.addDefault("Default Auto", new ExampleCommand());
     // chooser.addObject("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
-    
+    SmartDashboard.putData("Auto mode", m_chooser); 
     driveTrain = new TutorialDriveTrain_Subsystem();
+    motor= new TalonSRX(2);
+    //uses edited joystick class
+    stick = new OI();
   }
 
+  TalonSRX motor;
+  OI stick;
   /**
    * This function is called every robot packet, no matter the mode. Use
    * this for items like diagnostics that you want ran during disabled,
@@ -119,6 +125,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
   }
 
+
   @Override
   public void teleopInit() {
     // This makes sure that the autonomous stops running when
@@ -128,6 +135,11 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    
+    
+
+
+
   }
 
   /**
@@ -137,6 +149,10 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     //this is where we do things (ish)
+
+    //why use OI class as a middle man class?
+    motor.set(ControlMode.PercentOutput, stick.getJoystick().getY());
+    
   }
 
   /**
