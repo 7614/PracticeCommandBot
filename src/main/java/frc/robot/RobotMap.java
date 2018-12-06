@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
   This is how wiring is connected to the code. give the components names to make them usable. 
 */
 public class RobotMap {
+  public static final int CONTROLLERPORT = 0;
   public static final int LEFTFRONT = 5;
   public static final int LEFTBACK = 3;
 
