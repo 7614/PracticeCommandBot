@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
@@ -27,8 +28,8 @@ public class TutorialDriveTrain_Subsystem extends Subsystem{
         setDefaultCommand(new ArcadeDrive()); 
     }
 
-    public void TeleopDrive(Joystick Driver){
-        driveMotors.arcadeDrive(Driver.getX(),Driver.getY());
+    public void TeleopDrive(XboxController Controller){
+        driveMotors.arcadeDrive(Controller.getY(Hand.kLeft),Controller.getX(Hand.kLeft));
         
     }
 

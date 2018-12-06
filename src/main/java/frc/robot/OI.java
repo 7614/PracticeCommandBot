@@ -17,12 +17,10 @@ public class OI {
     /// CREATING JOYSTICKS
   // Each joystick seems to be a unique controller, ie. we only need 1 joystick,
   // and all buttons will be mapped onto it.
-  Joystick soloDrive = new Joystick(RobotMap.JOYSTICKPORT);
-
+   XboxController xbox = new XboxController(0);
   // This constructs the OI, that is, we tell the robot to make a new OI on runtime,
   // with all of the buttons and joysticks that we tell it to have here.
   public OI(){
-   Joystick stick = new Joystick(1);
    
    //Button button = new JoystickButton(stick, 2); //(still not working)
   }
@@ -30,8 +28,8 @@ public class OI {
   
   //Tutorial man said I had to, so I did.
   // (but seriously though, this allows us to acess the joystick we made at the top)
-  public Joystick getJoystick(){
-    return soloDrive;
+  public XboxController getJoystick(){
+    return xbox;
     
 
   }
