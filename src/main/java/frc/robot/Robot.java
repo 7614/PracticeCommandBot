@@ -152,6 +152,10 @@ public class Robot extends TimedRobot {
 
     //why use OI class as a middle man class?
     motor.set(ControlMode.PercentOutput, stick.getJoystick().getY());
+    ExampleCommand driver = new ExampleCommand();
+    
+
+    System.out.println(stick.getJoystick().getY());
     
   }
 
