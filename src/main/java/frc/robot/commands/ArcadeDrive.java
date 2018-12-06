@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.TutorialDriveTrain_Subsystem;
 
@@ -19,7 +18,7 @@ public class ArcadeDrive extends Command{
 
     @Override
     protected void execute(){
-        Robot.driveTrain.TeleopDrive(Robot.m_oi.getJoystick());
+        Robot.driveTrain.TeleopDrive(Robot.xbox);
     }
 
 }

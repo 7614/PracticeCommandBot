@@ -18,8 +18,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.TutorialDriveTrain_Subsystem;
 
 /**
@@ -30,15 +28,13 @@ import frc.robot.subsystems.TutorialDriveTrain_Subsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
 
-  
+  public static XboxController xbox;
   public static TutorialDriveTrain_Subsystem driveTrain;
   //defines the oi object for this instance of robot.
-  public static OI m_oi;
 
   
   
@@ -51,18 +47,20 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
-    m_chooser.addDefault("Default Auto", new ExampleCommand());
     // chooser.addObject("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser); 
     driveTrain = new TutorialDriveTrain_Subsystem();
     motor= new TalonSRX(2);
     //uses edited joystick class
-    stick = new OI();
+    xbox = new XboxController(RobotMap.CONTROLLERPORT);
   }
 
-  TalonSRX motor;
-  OI stick;
+  public XboxController getXbox() {
+    return xbox;
+  }
+
+
+TalonSRX motor;
   /**
    * This function is called every robot packet, no matter the mode. Use
    * this for items like diagnostics that you want ran during disabled,
@@ -150,13 +148,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     //this is where we do things (ish)
 
-    //why use OI class as a middle man class?
-    motor.set(ControlMode.PercentOutput, stick.getJoystick().getY());
-    ExampleCommand driver = new ExampleCommand();
-    
-
-    System.out.println(stick.getJoystick().getY());
-    
+    //why use OI class as a middle man class?    
   }
 
   /**
