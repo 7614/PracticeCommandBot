@@ -2,11 +2,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.Drive_System;;
 
-public class ArcadeDrive extends Command{
+public class UserDrive extends Command{
 
-    public ArcadeDrive(){
-        super("ArcadeDrive");
+    public UserDrive(){
+        super("UserDrive");
         requires(Robot.driveTrain);
     }
 
@@ -17,7 +18,7 @@ public class ArcadeDrive extends Command{
 
     @Override
     protected void execute(){
-        Robot.driveTrain.TeleopDrive(Robot.xbox);
+        Robot.driveTrain.drive(Robot.xbox);
     }
 
 }

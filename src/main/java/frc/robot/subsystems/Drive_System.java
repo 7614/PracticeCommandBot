@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
-import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.UserDrive;
 
 public class Drive_System extends Subsystem{
         //They changed the way drivetrains work. Now they have speed controllers which move groups of motors
@@ -25,13 +25,15 @@ public class Drive_System extends Subsystem{
     
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new ArcadeDrive()); 
+        setDefaultCommand(new UserDrive()); 
     }
 
-    public void TeleopDrive(XboxController Controller){
+    public void drive(XboxController Controller){
         driveMotors.arcadeDrive(Controller.getY(Hand.kLeft),Controller.getX(Hand.kLeft));
         
     }
+
+
 
     public void Stop(){
 
