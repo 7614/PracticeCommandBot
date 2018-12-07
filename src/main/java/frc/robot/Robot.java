@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.TutorialDriveTrain_Subsystem;
+import frc.robot.subsystems.Drive_System;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "My Auto";
 
   public static XboxController xbox;
-  public static TutorialDriveTrain_Subsystem driveTrain;
+  public static Drive_System driveTrain;
   //defines the oi object for this instance of robot.
 
   
@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // chooser.addObject("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser); 
-    driveTrain = new TutorialDriveTrain_Subsystem();
+    driveTrain = new Drive_System();
     motor= new TalonSRX(2);
     //uses edited joystick class
     xbox = new XboxController(RobotMap.CONTROLLERPORT);
